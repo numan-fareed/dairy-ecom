@@ -1,92 +1,95 @@
 'use client'
 
 import Link from 'next/link'
-import { Facebook, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react'
+import { Facebook, Instagram, Twitter, Youtube, Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="bg-earth-900 text-cream-100 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* About */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-cream-300 to-cream-400 rounded-full flex items-center justify-center">
-                <span className="text-earth-900 font-display font-bold text-lg">A</span>
-              </div>
-              <span className="font-display text-xl font-bold">Almarai</span>
-            </div>
-            <p className="font-body text-cream-200 text-sm leading-relaxed">
-              Premium dairy products, bakery, and poultry with a quality you can trust. 
-              Bringing freshness to your table every day.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-display text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-3">
-              {['Home', 'Products', 'Brands', 'Recipes', 'About Us'].map((link) => (
-                <li key={link}>
-                  <Link 
-                    href={`/${link.toLowerCase().replace(' ', '-')}`}
-                    className="text-cream-200 hover:text-cream-50 transition-colors duration-300 text-sm"
-                  >
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-display text-lg font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-3 text-cream-200 text-sm">
-              <li>P. O. Box 8524</li>
-              <li>Riyadh 11492</li>
-              <li className="pt-2">Phone: +966 (11) 470 0005</li>
-              <li>Email: info@almarai.com</li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="font-display text-lg font-semibold mb-4">Newsletter</h4>
-            <p className="text-cream-200 text-sm mb-4">
-              Subscribe for exclusive offers and updates
-            </p>
-            <div className="flex">
+    <footer className="bg-almarai-gray-800 text-white">
+      {/* Newsletter Section */}
+      <div className="bg-almarai-gray-700 py-8">
+        <div className="container-custom">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <h3 className="text-xl font-bold mb-4 md:mb-0">
+              Subscribe to our Newsletter <span className="text-almarai-green">No spam, good stuff only!</span>
+            </h3>
+            <div className="flex w-full md:w-auto">
               <input 
                 type="email" 
-                placeholder="Your email"
-                className="flex-1 px-4 py-2 rounded-l-lg bg-cream-100 text-earth-900 placeholder-earth-600 focus:outline-none focus:ring-2 focus:ring-sage-500"
+                placeholder="Enter your email"
+                className="px-4 py-3 w-full md:w-80 text-gray-900 rounded-l focus:outline-none"
               />
-              <button className="px-6 py-2 bg-sage-600 hover:bg-sage-500 rounded-r-lg transition-colors duration-300 font-semibold">
-                Join
+              <button className="bg-almarai-green hover:bg-almarai-green-dark px-6 py-3 rounded-r transition-colors">
+                Subscribe
               </button>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Social & Copyright */}
-        <div className="border-t border-earth-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex space-x-4">
-              {[Facebook, Instagram, Twitter, Linkedin, Youtube].map((Icon, idx) => (
-                <a 
-                  key={idx}
-                  href="#" 
-                  className="w-10 h-10 bg-earth-800 hover:bg-sage-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-            <p className="text-cream-300 text-sm">
-              © 2025 Almarai. All Rights Reserved.
-            </p>
+      {/* Main Footer */}
+      <div className="container-custom py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* Quick Links Column 1 */}
+          <div>
+            <h4 className="text-lg font-bold mb-4 text-almarai-green">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><Link href="/faqs" className="hover:text-almarai-green transition-colors">FAQs</Link></li>
+              <li><Link href="/sitemap" className="hover:text-almarai-green transition-colors">Sitemap</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-almarai-green transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-and-conditions" className="hover:text-almarai-green transition-colors">Terms and Conditions</Link></li>
+            </ul>
           </div>
+
+          {/* Quick Links Column 2 */}
+          <div>
+            <h4 className="text-lg font-bold mb-4 text-almarai-green">Contact</h4>
+            <ul className="space-y-2">
+              <li><Link href="/contact-us" className="hover:text-almarai-green transition-colors">Contact Us</Link></li>
+              <li><Link href="/contact-us/locations" className="hover:text-almarai-green transition-colors">Our Locations</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="lg:col-span-2">
+            <h4 className="text-lg font-bold mb-4 text-almarai-green">Quick Connect</h4>
+            <div className="space-y-2 text-sm">
+              <p>P. O. Box 8524, Riyadh 11492</p>
+              <p>Phone: +966 (11) 470 0005</p>
+              <p>WhatsApp: <a href="https://api.whatsapp.com/send?phone=966554700101" className="hover:text-almarai-green">+966554700101</a></p>
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div>
+            <h4 className="text-lg font-bold mb-4 text-almarai-green">Follow Us</h4>
+            <div className="flex space-x-3">
+              <a href="https://www.facebook.com/almarai/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white text-almarai-gray-800 rounded-full flex items-center justify-center hover:bg-almarai-green hover:text-white transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="https://www.instagram.com/almarai/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white text-almarai-gray-800 rounded-full flex items-center justify-center hover:bg-almarai-green hover:text-white transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="https://twitter.com/almarai" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white text-almarai-gray-800 rounded-full flex items-center justify-center hover:bg-almarai-green hover:text-white transition-colors">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="https://www.youtube.com/user/almaraicom" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white text-almarai-gray-800 rounded-full flex items-center justify-center hover:bg-almarai-green hover:text-white transition-colors">
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/company/almarai/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white text-almarai-gray-800 rounded-full flex items-center justify-center hover:bg-almarai-green hover:text-white transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-almarai-gray-700">
+        <div className="container-custom py-6">
+          <p className="text-center text-sm text-almarai-gray-400">
+            © 2025 Almarai. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

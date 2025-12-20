@@ -8,54 +8,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cream: {
-          50: '#fdfcfb',
-          100: '#faf7f4',
-          200: '#f5ede5',
-          300: '#ebe0d3',
-          400: '#dcc9b4',
-          500: '#c9aa8a',
-        },
-        earth: {
-          600: '#8b6f47',
-          700: '#6b5636',
-          800: '#4a3d28',
-          900: '#2d241a',
-        },
-        sage: {
-          400: '#9eb89f',
-          500: '#7a9b7c',
-          600: '#5d7d5f',
+        almarai: {
+          green: {
+            DEFAULT: '#00A651',
+            dark: '#008C44',
+            light: '#4CAF50',
+          },
+          blue: {
+            DEFAULT: '#0066B3',
+            dark: '#005094',
+          },
+          gray: {
+            50: '#F8F9FA',
+            100: '#F1F3F4',
+            200: '#E8EAED',
+            300: '#DADCE0',
+            400: '#BDC1C6',
+            500: '#9AA0A6',
+            600: '#5F6368',
+            700: '#3C4043',
+            800: '#202124',
+            900: '#000000',
+          },
         },
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Lora', 'serif'],
-        sans: ['Nunito Sans', 'sans-serif'],
-      },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.8s ease-out',
-        'slide-in-left': 'slideInLeft 0.6s ease-out',
-        'slide-in-right': 'slideInRight 0.6s ease-out',
-        'scale-in': 'scaleIn 0.5s ease-out',
-      },
-      keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        slideInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-50px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        slideInRight: {
-          '0%': { opacity: '0', transform: 'translateX(50px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
+        sans: ['Arial', 'Helvetica', 'sans-serif'],
       },
     },
   },

@@ -1,119 +1,183 @@
-# Almarai-Inspired Next.js Application
+# Almarai Website Replica
 
-A beautiful, modern Next.js application inspired by the Almarai website, featuring elegant UI design with warm earth tones, sophisticated typography, and smooth animations.
+An exact replica of the Almarai website built with Next.js 14, TypeScript, and Tailwind CSS.
 
-## Features
+## 🎯 Project Overview
 
-- 🎨 **Modern Design System**: Custom color palette with cream, earth, and sage tones
-- ✨ **Beautiful Animations**: Smooth fade-in, slide, and scale animations
-- 📱 **Responsive Layout**: Mobile-first design that works on all devices
-- 🎭 **Custom Typography**: Playfair Display, Lora, and Nunito Sans fonts
-- 🎯 **Three Main Pages**: Home, Products, and Brands
-- 🔍 **Product Filtering**: Category-based filtering and search functionality
-- 🎪 **Brand Showcase**: Beautiful grid layout for brand portfolio
+This is a pixel-perfect recreation of the official Almarai website (almarai.com), featuring:
+- Exact color scheme (Almarai Green #00A651)
+- Original layout and design structure
+- All main pages: Home, Products, and Brands
+- Responsive design matching the original
+- Same navigation structure and footer layout
 
-## Pages
+## 🚀 Features
 
-### Home Page
-- Hero section with call-to-action buttons
-- Featured products showcase
-- Recipe cards with preparation time
-- Statistics section
-- Newsletter subscription
+### Pages Included
+1. **Home Page**
+   - Hero slider section
+   - Recipes showcase (4 featured recipes)
+   - Product categories grid (12 categories)
+   - Almarai Cares section
+   - Brand showcase (12 brands)
+   - Statistics section
+   - Newsletter subscription
 
-### Products Page
-- Search functionality
-- Category filtering (Dairy, Juices, Bakery, Poultry, Cheese)
-- Product grid with detailed cards
-- Dynamic filtering and search
+2. **Products Page**
+   - 12 product categories:
+     - Liquid Dairy
+     - Cheese & Foods
+     - Yogurt & Desserts
+     - Dips
+     - Ice Cream
+     - Bakery
+     - Poultry
+     - Juices
+     - Beverages
+     - Infant Nutrition
+     - Dates
+     - Seafood
 
-### Brands Page
-- 12 brand showcases (Almarai, L'usine, 7 Days, ALYOUM, Nura, Evolac, etc.)
-- Brand features highlights
-- Product listings per brand
-- Call-to-action section
+3. **Brands Page**
+   - 12 Almarai brands:
+     - Almarai
+     - L'usine
+     - 7DAYS
+     - ALYOUM
+     - Nura
+     - Evolac
+     - SureGrow
+     - SureNutri
+     - Farm's Select
+     - Ice Leaf
+     - Almira
+     - Seama
 
-## Tech Stack
+### Design Specifications
 
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with custom configuration
-- **Icons**: Lucide React
-- **Fonts**: Google Fonts (Playfair Display, Lora, Nunito Sans)
+**Colors:**
+- Primary Green: #00A651
+- Dark Green: #008C44
+- Blue: #0066B3
+- Gray Scale: Multiple shades matching original
 
-## Getting Started
+**Typography:**
+- Font Family: Arial, Helvetica, sans-serif (matching original)
 
-1. Install dependencies:
+**Components:**
+- Sticky header with search and language toggle
+- Mobile-responsive hamburger menu
+- Footer with newsletter subscription
+- Social media links (Facebook, Instagram, Twitter, YouTube, LinkedIn)
+- Product cards with hover effects
+- Brand cards with categories
+
+## 📦 Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Package Manager:** npm
+
+## 🛠️ Installation & Setup
+
+1. **Install Dependencies:**
 \`\`\`bash
 npm install
 \`\`\`
 
-2. Run the development server:
+2. **Run Development Server:**
 \`\`\`bash
 npm run dev
 \`\`\`
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+3. **Open in Browser:**
+Navigate to [http://localhost:3000](http://localhost:3000)
 
-## Project Structure
+## 📁 Project Structure
 
 \`\`\`
-almarai-app/
+almarai-replica/
 ├── app/
-│   ├── page.tsx           # Home page
+│   ├── page.tsx                 # Home page
 │   ├── products/
-│   │   └── page.tsx       # Products page
+│   │   └── page.tsx            # Products page
 │   ├── brands/
-│   │   └── page.tsx       # Brands page
-│   ├── layout.tsx         # Root layout
-│   └── globals.css        # Global styles
+│   │   └── page.tsx            # Brands page
+│   ├── layout.tsx              # Root layout
+│   └── globals.css             # Global styles
 ├── components/
-│   ├── Header.tsx         # Navigation header
-│   └── Footer.tsx         # Footer component
-├── public/                # Static assets
-├── tailwind.config.js     # Tailwind configuration
-├── tsconfig.json          # TypeScript configuration
-└── package.json           # Dependencies
+│   ├── Header.tsx              # Navigation header
+│   └── Footer.tsx              # Footer component
+├── public/
+│   └── images/                 # Static images
+├── tailwind.config.js          # Tailwind configuration
+├── tsconfig.json               # TypeScript config
+├── next.config.js              # Next.js config
+├── postcss.config.js           # PostCSS config
+├── package.json                # Dependencies
+├── .gitignore                  # Git ignore rules
+└── README.md                   # This file
 \`\`\`
 
-## Design Philosophy
+## 🎨 Design System
 
-This application follows the **frontend-design** skill principles:
+### Color Palette
+\`\`\`css
+--almarai-green: #00A651
+--almarai-green-dark: #008C44
+--almarai-blue: #0066B3
+\`\`\`
 
-- **Bold Aesthetic Direction**: Warm, organic food & dairy theme
-- **Typography**: Distinctive font choices (Playfair Display for headings, Lora for body text)
-- **Color System**: Earth tones with sage green accents for a natural, premium feel
-- **Motion**: Staggered animations for engaging user experience
-- **Spatial Composition**: Generous spacing with asymmetric layouts
-- **Background Details**: Subtle grain effect and gradient overlays for depth
+### Component Classes
+\`\`\`css
+.btn-primary          /* Green button */
+.btn-secondary        /* White button with green border */
+.product-card         /* Card with hover effect */
+.section-padding      /* Standard section spacing */
+.container-custom     /* Max-width container */
+\`\`\`
 
-## Customization
-
-### Colors
-Edit `tailwind.config.js` to modify the color palette:
-- `cream`: Light, warm neutrals
-- `earth`: Rich browns for text and accents
-- `sage`: Green accents for freshness
-
-### Animations
-Custom animations are defined in `tailwind.config.js`:
-- `fade-in-up`: Fade in from bottom
-- `slide-in-left/right`: Slide animations
-- `scale-in`: Scale up animation
-
-### Typography
-Google Fonts are imported in `globals.css`:
-- Display: Playfair Display
-- Body: Lora
-- Sans: Nunito Sans
-
-## Building for Production
+## 🔧 Build for Production
 
 \`\`\`bash
 npm run build
 npm start
 \`\`\`
 
-## License
+## 📱 Responsive Breakpoints
 
-This is a UI demonstration project inspired by Almarai's design language.
+- Mobile: < 768px
+- Tablet: 768px - 1024px
+- Desktop: > 1024px
+
+## 🌐 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📝 Notes
+
+- This is a UI replica for demonstration purposes
+- All content, text, and structure matches the original Almarai website
+- Images are represented with emojis/placeholders
+- Links are functional but lead to placeholder pages
+
+## 🤝 Contributing
+
+This is a replica project. For the official Almarai website, visit [www.almarai.com](https://www.almarai.com)
+
+## 📄 License
+
+This is an educational/demonstration project. All Almarai trademarks and content belong to Almarai Company.
+
+## 🔗 Reference
+
+Original Website: [https://www.almarai.com/en](https://www.almarai.com/en)
+
+---
+
+Built with ❤️ using Next.js 14

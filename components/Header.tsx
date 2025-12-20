@@ -1,115 +1,91 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { Menu, X, Search, ChevronDown } from 'lucide-react'
+import { useState } from 'react'
+import { Menu, X, Search, Globe } from 'lucide-react'
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/products', label: 'Products' },
+    { href: '/brands', label: 'Brands' },
+    { href: '/recipes', label: 'Recipes' },
+    { href: '/visit-almarai', label: 'Almarai Visits' },
+    { href: '/food-service', label: 'Foodservice' },
+    { href: '/careers', label: 'Careers' },
+    { href: '/contact-us', label: 'Contact Us' },
+    { href: '/corporate', label: 'Corporate' },
+  ]
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-cream-50/95 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-white shadow-md sticky top-0 z-50">
+      {/* Main Header */}
+      <div className="container-custom">
         <div className="flex items-center justify-between h-20">
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-gray-700 hover:text-almarai-green"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-earth-600 to-earth-800 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <span className="text-cream-50 font-display font-bold text-xl">A</span>
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-sage-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <Link href="/" className="flex items-center">
+            <div className="flex items-center space-x-2">
+              <svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5L25 15H15L20 5Z" fill="#00A651"/>
+                <circle cx="20" cy="25" r="8" fill="#00A651"/>
+                <text x="40" y="28" fontFamily="Arial" fontSize="18" fontWeight="bold" fill="#00A651">almarai</text>
+              </svg>
             </div>
-            <span className="font-display text-2xl font-bold text-earth-800 hidden sm:block">
-              Almarai
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              href="/" 
-              className="font-sans font-semibold text-earth-800 hover:text-earth-600 transition-colors duration-300 relative group"
-            >
-              Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-earth-600 group-hover:w-full transition-all duration-300"></span>
-            </Link>
-            <Link 
-              href="/products" 
-              className="font-sans font-semibold text-earth-800 hover:text-earth-600 transition-colors duration-300 relative group"
-            >
-              Products
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-earth-600 group-hover:w-full transition-all duration-300"></span>
-            </Link>
-            <Link 
-              href="/brands" 
-              className="font-sans font-semibold text-earth-800 hover:text-earth-600 transition-colors duration-300 relative group"
-            >
-              Brands
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-earth-600 group-hover:w-full transition-all duration-300"></span>
-            </Link>
+          <nav className="hidden lg:flex items-center space-x-6">
+            {navLinks.slice(0, 5).map((link) => (
+              <Link 
+                key={link.href}
+                href={link.href}
+                className="text-gray-700 hover:text-almarai-green text-sm font-medium transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Search & Mobile Menu */}
+          {/* Right Icons */}
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-earth-800 hover:text-earth-600 transition-colors duration-300">
+            <button className="p-2 text-gray-700 hover:text-almarai-green">
               <Search className="w-5 h-5" />
             </button>
-            
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-earth-800 hover:text-earth-600 transition-colors duration-300"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button className="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-almarai-green text-sm">
+              <Globe className="w-4 h-4" />
+              <span>عربى</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div 
-        className={`md:hidden transition-all duration-500 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="bg-cream-50 border-t border-cream-300 px-4 py-6 space-y-4">
-          <Link 
-            href="/" 
-            className="block font-sans font-semibold text-earth-800 hover:text-earth-600 py-2 transition-colors duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link 
-            href="/products" 
-            className="block font-sans font-semibold text-earth-800 hover:text-earth-600 py-2 transition-colors duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Products
-          </Link>
-          <Link 
-            href="/brands" 
-            className="block font-sans font-semibold text-earth-800 hover:text-earth-600 py-2 transition-colors duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Brands
-          </Link>
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t">
+          <nav className="container-custom py-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block py-3 text-gray-700 hover:text-almarai-green border-b"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-      </div>
+      )}
     </header>
   )
 }

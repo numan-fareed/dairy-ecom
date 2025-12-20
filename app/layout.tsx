@@ -4,8 +4,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Almarai Inspired - Fresh Dairy & Quality Products',
-  description: 'Premium dairy products, bakery, and poultry with quality you can trust',
+  title: 'Fresh Dairy, Bakery, and Poultry Products | Almarai',
+  description: 'Almarai brings high-quality food & drinks across the region. Discover dairy, bakery, beverages, ice cream, poultry products, & healthy nutrition options.',
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="grain">
+      <body>
         <Header />
         <main>{children}</main>
         <Footer />

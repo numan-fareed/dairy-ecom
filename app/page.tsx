@@ -1,249 +1,267 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Clock, Star, TrendingUp } from 'lucide-react'
+import { ArrowRight, Clock } from 'lucide-react'
 
 const HomePage = () => {
-  const featuredProducts = [
+  const heroSlides = [
     {
-      title: 'Fresh Dairy',
-      description: 'Farm-fresh milk and dairy products delivered daily',
-      image: '🥛',
-      color: 'from-blue-50 to-blue-100',
-      stats: '4M liters daily'
+      title: 'Almarai Dairy',
+      subtitle: 'The taste distinguishing gatherings',
+      cta: 'Explore More',
+      link: '/brands/almarai/liquid-dairy',
+      bgColor: 'bg-blue-50'
     },
     {
-      title: 'Premium Juices',
-      description: 'Natural juices from nature\'s best fruits',
-      image: '🧃',
-      color: 'from-orange-50 to-orange-100',
-      stats: 'No added sugar'
+      title: 'Almarai Cooking Cream',
+      subtitle: 'Prepare delicious & nutritious meals using Almarai products',
+      cta: 'Explore More',
+      link: '/brands/almarai/cheeses-and-foods',
+      bgColor: 'bg-green-50'
     },
     {
-      title: 'Artisan Bakery',
-      description: 'Fresh, nutritious and delicious baked goods',
-      image: '🥖',
-      color: 'from-amber-50 to-amber-100',
-      stats: 'Baked fresh daily'
+      title: 'Natural Juices',
+      subtitle: 'Natural juices from Nature\'s best fruits & with no added sugar!',
+      cta: 'Explore More',
+      link: '/brands/almarai/juices',
+      bgColor: 'bg-orange-50'
     },
-    {
-      title: 'Quality Poultry',
-      description: 'Fresh, healthy and nutritious chicken products',
-      image: '🍗',
-      color: 'from-yellow-50 to-yellow-100',
-      stats: 'Farm to table'
-    }
   ]
 
   const recipes = [
-    { name: 'Creamy Chicken Tawouk Skewers', time: '25 min', image: '🍢' },
-    { name: 'Mango Coconut Panna Cotta', time: '20 min', image: '🥭' },
-    { name: 'Salmon Cream Cheese Mushrooms', time: '35 min', image: '🍄' },
-    { name: 'Tortilla Gishta Tacos', time: '15 min', image: '🌮' }
+    {
+      title: 'Creamy Chicken Tawouk Skewers',
+      description: 'A delicious and satisfying dish, perfect to enjoy with warm bread and grilled vegetables',
+      time: '25 min',
+      image: '/images/recipe1.jpg'
+    },
+    {
+      title: 'Mango and Coconut Panna Cotta',
+      description: 'A delightful panna cotta that combines the rich flavor of coconut and the refreshing sweetness of mango',
+      time: '20 min',
+      image: '/images/recipe2.jpg'
+    },
+    {
+      title: 'Salmon and Cream Cheese Stuffed Mushrooms',
+      description: 'One of the most delicious and distinctive appetizers that can be served on any occasion',
+      time: '35 min',
+      image: '/images/recipe3.jpg'
+    },
+    {
+      title: 'Tortilla Gishta Tacos',
+      description: 'Gishta Tacos recipe is a delicious dish that combines rich creamy flavor with traditional Mexican tastes',
+      time: '15 min',
+      image: '/images/recipe4.jpg'
+    },
+  ]
+
+  const productCategories = [
+    { name: 'Liquid Dairy', icon: '🥛', link: '/products/liquid-dairy' },
+    { name: 'Cheese & Foods', icon: '🧀', link: '/products/cheese-foods' },
+    { name: 'Yogurt & Desserts', icon: '🍨', link: '/products/yogurt-desserts' },
+    { name: 'Dips', icon: '🥣', link: '/products/dips' },
+    { name: 'Ice Cream', icon: '🍦', link: '/products/ice-cream' },
+    { name: 'Bakery', icon: '🥖', link: '/products/bakery' },
+    { name: 'Poultry', icon: '🍗', link: '/products/poultry' },
+    { name: 'Juices', icon: '🧃', link: '/products/juices' },
+    { name: 'Beverages', icon: '☕', link: '/products/beverages' },
+    { name: 'Infant Nutrition', icon: '🍼', link: '/products/infant-nutrition' },
+    { name: 'Dates', icon: '🌴', link: '/products/dates' },
+    { name: 'Seafood', icon: '🐟', link: '/products/seafood' },
+  ]
+
+  const brands = [
+    { name: 'Almarai', logo: 'ALMARAI', link: '/brands/almarai' },
+    { name: 'Lusine', logo: 'L\'USINE', link: '/brands/lusine' },
+    { name: '7DAYS', logo: '7DAYS', link: '/brands/seven-days' },
+    { name: 'ALYOUM', logo: 'ALYOUM', link: '/brands/alyoum' },
+    { name: 'Nura', logo: 'NURA', link: '/brands/nura' },
+    { name: 'Evolac', logo: 'EVOLAC', link: '/brands/evolac' },
+    { name: 'SureGrow', logo: 'SUREGROW', link: '/brands/suregrow' },
+    { name: 'SureNutri', logo: 'SURENUTRI', link: '/brands/surenutri' },
+    { name: "Farm's Select", logo: "FARM'S SELECT", link: '/brands/farms-select' },
+    { name: 'Ice Leaf', logo: 'ICE LEAF', link: '/brands/ice-leaf' },
+    { name: 'Almira', logo: 'ALMIRA', link: '/brands/almira' },
+    { name: 'Seama', logo: 'SEAMA', link: '/brands/seama' },
   ]
 
   const stats = [
-    { value: '4M', label: 'Liters of milk daily', icon: '🥛' },
-    { value: '10K+', label: 'Delivery vehicles', icon: '🚚' },
-    { value: '39K', label: 'Quality tests per day', icon: '✓' },
-    { value: '220K+', label: 'Points of sale', icon: '🏪' }
+    {
+      icon: '🥛',
+      number: '4 Million',
+      description: 'Almarai produces 4 million liters of milk a day an average of 40 liters per cow per day roughly double the European average'
+    },
+    {
+      icon: '🚚',
+      number: '10,000',
+      description: 'The largest food and beverages fleet in the Middle East. Almarai fleet includes more than 10,000 vehicles'
+    },
+    {
+      icon: '✓',
+      number: '39,000',
+      description: 'Almarai conducts 39,000 Quality tests per day to ensure a quality you can trust'
+    },
+    {
+      icon: '🏪',
+      number: '220,000',
+      description: 'Almarai products reach more than 220,000 points of sale across 7 countries'
+    },
   ]
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-28 pb-20 px-4 overflow-hidden texture-overlay">
-        <div className="absolute inset-0 bg-gradient-to-br from-cream-50 via-cream-100 to-sage-400/10"></div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8 animate-fade-in-up">
-              <div className="inline-block">
-                <span className="px-4 py-2 bg-sage-500/10 text-sage-700 rounded-full text-sm font-semibold border border-sage-500/20">
-                  Quality You Can Trust
-                </span>
-              </div>
-              
-              <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-earth-900 leading-tight">
-                Fresh Dairy
-                <span className="block text-earth-700">For Your Family</span>
-              </h1>
-              
-              <p className="font-body text-lg text-earth-700 leading-relaxed max-w-xl">
-                Experience the finest selection of dairy products, fresh juices, artisan bakery, 
-                and premium poultry. Bringing nature's goodness to your table every day.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Link 
-                  href="/products"
-                  className="group px-8 py-4 bg-earth-800 hover:bg-earth-700 text-cream-50 rounded-lg font-semibold transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                >
-                  <span>Explore Products</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                
-                <Link 
-                  href="/brands"
-                  className="px-8 py-4 bg-cream-50 hover:bg-cream-100 text-earth-800 rounded-lg font-semibold transition-all duration-300 border-2 border-earth-800 transform hover:-translate-y-1"
-                >
-                  Our Brands
-                </Link>
-              </div>
+      {/* Hero Slider */}
+      <section className="relative h-[500px] md:h-[600px] bg-gradient-to-br from-blue-50 to-green-50">
+        <div className="container-custom h-full flex items-center">
+          <div className="max-w-2xl">
+            <div className="inline-block mb-4">
+              <span className="bg-white text-almarai-green px-4 py-2 rounded-full text-sm font-semibold">
+                Quality You Can Trust
+              </span>
             </div>
-
-            {/* Right Content - Hero Image Placeholder */}
-            <div className="relative animate-slide-in-right">
-              <div className="relative aspect-square bg-gradient-to-br from-sage-100 to-cream-200 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-9xl transform hover:scale-110 transition-transform duration-500">🥛</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-earth-900/20 to-transparent"></div>
-              </div>
-              
-              {/* Floating Badge */}
-              <div className="absolute -top-4 -right-4 bg-sage-600 text-cream-50 px-6 py-3 rounded-full shadow-xl animate-scale-in delay-500">
-                <div className="flex items-center space-x-2">
-                  <Star className="w-5 h-5 fill-current" />
-                  <span className="font-bold">Premium Quality</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-20 px-4 bg-cream-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-earth-900 mb-4">
-              Our Products
-            </h2>
-            <p className="font-body text-lg text-earth-700 max-w-2xl mx-auto">
-              Products with a quality you can trust
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+              {heroSlides[0].title}
+            </h1>
+            <p className="text-xl text-gray-700 mb-8">
+              {heroSlides[0].subtitle}
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product, idx) => (
-              <div 
-                key={idx}
-                className={`hover-lift bg-gradient-to-br ${product.color} rounded-2xl p-6 cursor-pointer animate-fade-in-up`}
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <div className="text-6xl mb-4">{product.image}</div>
-                <h3 className="font-display text-2xl font-bold text-earth-900 mb-2">
-                  {product.title}
-                </h3>
-                <p className="font-body text-earth-700 mb-4 text-sm">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-earth-600 bg-white/60 px-3 py-1 rounded-full">
-                    {product.stats}
-                  </span>
-                  <ArrowRight className="w-5 h-5 text-earth-700" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link 
-              href="/products"
-              className="inline-flex items-center space-x-2 px-8 py-4 bg-earth-800 hover:bg-earth-700 text-cream-50 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              <span>View All Products</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-wrap gap-4">
+              <Link href={heroSlides[0].link} className="btn-primary inline-flex items-center">
+                {heroSlides[0].cta}
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link href="/recipes" className="btn-secondary">
+                Check Our Recipes
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Recipes Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-sage-50 to-cream-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-earth-900 mb-4">
-              Delicious Recipes
-            </h2>
-            <p className="font-body text-lg text-earth-700">
-              Mouthwatering meals for the whole family to enjoy
-            </p>
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Recipes</h2>
+            <p className="text-xl text-gray-600">Mouthwatering meals for the whole family to enjoy!</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {recipes.map((recipe, idx) => (
-              <div 
-                key={idx}
-                className="bg-cream-50 rounded-2xl overflow-hidden hover-lift cursor-pointer animate-fade-in-up"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <div className="aspect-video bg-gradient-to-br from-cream-200 to-sage-100 flex items-center justify-center text-7xl">
-                  {recipe.image}
+              <div key={idx} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow product-card">
+                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <span className="text-6xl">🍽️</span>
                 </div>
                 <div className="p-5">
-                  <div className="flex items-center space-x-2 text-earth-600 text-sm mb-2">
-                    <Clock className="w-4 h-4" />
+                  <div className="flex items-center text-almarai-green text-sm mb-2">
+                    <Clock className="w-4 h-4 mr-1" />
                     <span>{recipe.time}</span>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-earth-900 mb-3">
-                    {recipe.name}
-                  </h3>
-                  <button className="text-earth-700 font-semibold text-sm hover:text-earth-600 transition-colors flex items-center space-x-1">
-                    <span>Get Recipe</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{recipe.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{recipe.description}</p>
+                  <Link href="/recipes" className="text-almarai-green font-semibold text-sm hover:text-almarai-green-dark flex items-center">
+                    Get Recipe
+                    <ArrowRight className="ml-1 w-4 h-4" />
+                  </Link>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/recipes" className="btn-primary inline-flex items-center">
+              See More
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Products Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
+            <p className="text-xl text-gray-600">Products with a Quality You Can Trust</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {productCategories.map((category, idx) => (
+              <Link 
+                key={idx}
+                href={category.link}
+                className="bg-white p-6 rounded-lg text-center hover:shadow-lg transition-shadow product-card border border-gray-200"
+              >
+                <div className="text-5xl mb-3">{category.icon}</div>
+                <h3 className="text-sm font-semibold text-gray-900">{category.name}</h3>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/products" className="btn-primary inline-flex items-center">
+              Explore More
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Almarai Cares Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="aspect-video bg-gradient-to-br from-green-100 to-blue-100 rounded-lg flex items-center justify-center">
+              <span className="text-8xl">👨‍👦</span>
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Almarai Cares</h2>
+              <p className="text-gray-700 leading-relaxed">
+                Almarai not only provides fresh and healthy products to its consumers, but also works with them hand in hand to support local communities in order to achieve a real positive impact through its corporate social responsibility program, which is based on: (training and development - promoting healthy living - community care). Almarai cares about you all.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Brands Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Brands</h2>
+            <p className="text-xl text-gray-600">Brands with a Quality You Can Trust</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {brands.map((brand, idx) => (
+              <Link 
+                key={idx}
+                href={brand.link}
+                className="bg-white p-8 rounded-lg hover:shadow-lg transition-shadow product-card border border-gray-200 flex items-center justify-center"
+              >
+                <span className="text-lg font-bold text-almarai-green">{brand.logo}</span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 bg-earth-900 text-cream-50">
-        <div className="max-w-7xl mx-auto">
+      <section className="section-padding bg-almarai-green text-white">
+        <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
-              <div 
-                key={idx}
-                className="text-center animate-fade-in-up"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
+              <div key={idx} className="text-center">
                 <div className="text-6xl mb-4">{stat.icon}</div>
-                <div className="font-display text-5xl font-bold mb-2 text-sage-400">
-                  {stat.value}
-                </div>
-                <p className="font-body text-cream-200">
-                  {stat.label}
-                </p>
+                <div className="text-4xl font-bold mb-2">{stat.number}</div>
+                <p className="text-sm opacity-90">{stat.description}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-cream-100 to-sage-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-earth-900 mb-6">
-            Subscribe to Our Newsletter
-          </h2>
-          <p className="font-body text-lg text-earth-700 mb-8">
-            Get exclusive offers, recipes, and updates delivered to your inbox
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input 
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-4 rounded-lg bg-cream-50 border-2 border-cream-300 focus:border-sage-500 focus:outline-none text-earth-900 placeholder-earth-600"
-            />
-            <button className="px-8 py-4 bg-sage-600 hover:bg-sage-500 text-cream-50 rounded-lg font-semibold transition-colors duration-300 shadow-lg">
-              Subscribe
-            </button>
+          <div className="text-center mt-12">
+            <Link href="/corporate" className="inline-block bg-white text-almarai-green px-8 py-3 rounded font-semibold hover:bg-gray-100 transition-colors">
+              Visit Corporate Profile
+            </Link>
           </div>
         </div>
       </section>
