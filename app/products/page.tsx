@@ -2,94 +2,60 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { categoryService } from '@/services/categoryService'
+import { Category } from '@/types/database'
 
 const ProductsPage = () => {
-  const categories = [
-    {
-      title: 'Liquid Dairy',
-      description: 'Start your day with fresh, nutritious milk and dairy beverages',
-      icon: '🥛',
-      link: '/products/liquid-dairy',
-      bgColor: 'bg-blue-50'
-    },
-    {
-      title: 'Cheese & Foods',
-      description: 'In the morning, afternoon, evening or at any moment of the day, our cheeses, cooking products, honey and olive oil remain the preferred and healthy choice on your tables.',
-      icon: '🧀',
-      link: '/products/cheese-foods',
-      bgColor: 'bg-yellow-50'
-    },
-    {
-      title: 'Yogurt & Desserts',
-      description: 'Here you can discover our variety of high quality & nutritious yoghurts and desserts. Whether you prefer yogurts before, during or after meals, our products are of quality you can trust.',
-      icon: '🍨',
-      link: '/products/yogurt-desserts',
-      bgColor: 'bg-pink-50'
-    },
-    {
-      title: 'Dips',
-      description: 'We have a variety of dips for you! Natural Fresh Cream, Labneh and Hummus. All adding high nutritional value to your meals.',
-      icon: '🥣',
-      link: '/products/dips',
-      bgColor: 'bg-green-50'
-    },
-    {
-      title: 'Ice Cream',
-      description: 'Almarai, the pioneer in dairy production, has now stepped into the world of ice cream creation. Using high-quality milk, cream and Natural ingredients, we have crafted a range of ice cream treats that guarantee ultimate enjoyment.',
-      icon: '🍦',
-      link: '/products/ice-cream',
-      bgColor: 'bg-purple-50'
-    },
-    {
-      title: 'Bakery',
-      description: 'We provide you with the finest fresh, nutritious and delicious baked goods; With a variety of options to suit every member of the family.',
-      icon: '🥖',
-      link: '/products/bakery',
-      bgColor: 'bg-orange-50'
-    },
-    {
-      title: 'Poultry',
-      description: 'Craving for some chicken? unleash your creativity with a wide range of chicken products. Get your family the most delicious chicken dishes every day.',
-      icon: '🍗',
-      link: '/products/poultry',
-      bgColor: 'bg-yellow-50'
-    },
-    {
-      title: 'Juices',
-      description: 'We\'ve got nature\'s best juices for you! A variety that adds flavor to your life and matches your taste.',
-      icon: '🧃',
-      link: '/products/juices',
-      bgColor: 'bg-orange-50'
-    },
-    {
-      title: 'Beverages',
-      description: 'Almarai company provides a variety of delicious drinks rich in essential vitamins that give you freshness, whether you are a fan of iced coffee, iced tea or refreshing drinks.',
-      icon: '☕',
-      link: '/products/beverages',
-      bgColor: 'bg-brown-50'
-    },
-    {
-      title: 'Infant Nutrition',
-      description: 'Almarai is committed to providing the best food to take care of the health and development of your child from day one.',
-      icon: '🍼',
-      link: '/products/infant-nutrition',
-      bgColor: 'bg-blue-50'
-    },
-    {
-      title: 'Dates',
-      description: 'Almira brand provides a variety of dates that represents Saudi culture & tradition; reflecting hospitality and generosity. Dates are natural and healthy, high in nutritional value, gives energy and vitality.',
-      icon: '🌴',
-      link: '/products/dates',
-      bgColor: 'bg-amber-50'
-    },
-    {
-      title: 'Seafood',
-      description: 'Which seafood do you prefer?! We have omega-rich seafood, great taste meets the highest quality standards.',
-      icon: '🐟',
-      link: '/products/seafood',
-      bgColor: 'bg-cyan-50'
-    },
+  const [categories, setCategories] = useState<Category[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const bgColors = [
+    'bg-blue-50',
+    'bg-yellow-50',
+    'bg-pink-50',
+    'bg-green-50',
+    'bg-purple-50',
+    'bg-orange-50',
+    'bg-cyan-50',
+    'bg-amber-50',
+    'bg-indigo-50',
+    'bg-rose-50',
+    'bg-teal-50',
+    'bg-lime-50'
   ]
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true)
+      const { data, error } = await categoryService.getAll()
+      
+      if (error) {
+        setError(error.message || 'Failed to fetch categories')
+        console.error('Error fetching categories:', error)
+      } else if (data) {
+        setCategories(data)
+      }
+    } catch (err) {
+      setError('An unexpected error occurred')
+      console.error('Error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const generateSlug = (name: string) => {
+    return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  }
+
+  const getBgColor = (index: number) => {
+    return bgColors[index % bgColors.length]
+  }
 
   return (
     <div className="min-h-screen">
@@ -104,27 +70,77 @@ const ProductsPage = () => {
       {/* Products Grid */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.map((category, idx) => (
-              <div 
-                key={idx}
-                className={`${category.bgColor} rounded-lg overflow-hidden hover:shadow-xl transition-shadow product-card`}
+          {/* Loading State */}
+          {loading && (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-almarai-green"></div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && !loading && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg text-center">
+              <p className="font-semibold mb-2">Error loading categories</p>
+              <p className="text-sm">{error}</p>
+              <button 
+                onClick={fetchCategories}
+                className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
               >
-                <div className="p-8">
-                  <div className="text-7xl mb-4">{category.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{category.title}</h3>
-                  <p className="text-gray-700 mb-6 leading-relaxed">{category.description}</p>
-                  <Link 
-                    href={category.link}
-                    className="inline-flex items-center text-almarai-green font-semibold hover:text-almarai-green-dark"
-                  >
-                    Explore Products
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Link>
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {/* Categories Grid */}
+          {!loading && !error && categories.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {categories.map((category, idx) => (
+                <div 
+                  key={category.id}
+                  className={`${getBgColor(idx)} rounded-lg overflow-hidden hover:shadow-xl transition-shadow product-card`}
+                >
+                  <div className="p-8">
+                    {/* Category Image - Using regular img tag */}
+                    {category.image && (
+                      <div className="mb-4 w-20 h-20">
+                        <img 
+                          src={category.image}
+                          alt={category.name}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+                    
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      {category.name}
+                    </h3>
+                    
+                    {category.description && (
+                      <p className="text-gray-700 mb-6 leading-relaxed">
+                        {category.description}
+                      </p>
+                    )}
+                    
+                    <Link 
+                      href={`/products/${generateSlug(category.id)}`}
+                      className="inline-flex items-center text-almarai-green font-semibold hover:text-almarai-green-dark"
+                    >
+                      Explore Products
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && categories.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-xl text-gray-600 mb-4">No categories available yet</p>
+              <p className="text-gray-500">Check back soon for new products!</p>
+            </div>
+          )}
         </div>
       </section>
 
