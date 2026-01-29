@@ -2,8 +2,36 @@
 
 import Link from 'next/link'
 import { ArrowRight, Clock } from 'lucide-react'
+import { Category } from '@/types/database'
+import { useEffect, useState } from 'react'
+import { categoryService } from '@/services/categoryService'
 
 const HomePage = () => {
+  const [categories, setCategories] = useState<Category[]>([])
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      // setLoading(true)
+      const { data, error } = await categoryService.getAll()
+      
+      if (error) {
+        // setError(error.message || 'Failed to fetch categories')
+        console.error('Error fetching categories:', error)
+      } else if (data) {
+const categories = data.slice(0, 12)
+        setCategories(categories)
+      }
+    } catch (err) {
+      // setError('An unexpected error occurred')
+      console.error('Error:', err)
+    } finally {
+      // setLoading(false)
+    }
+  }
+
   const heroSlides = [
     {
       title: 'Almarai Dairy',
@@ -26,48 +54,6 @@ const HomePage = () => {
       link: '/brands/almarai/juices',
       bgColor: 'bg-orange-50'
     },
-  ]
-
-  const recipes = [
-    {
-      title: 'Creamy Chicken Tawouk Skewers',
-      description: 'A delicious and satisfying dish, perfect to enjoy with warm bread and grilled vegetables',
-      time: '25 min',
-      image: '/images/recipe1.jpg'
-    },
-    {
-      title: 'Mango and Coconut Panna Cotta',
-      description: 'A delightful panna cotta that combines the rich flavor of coconut and the refreshing sweetness of mango',
-      time: '20 min',
-      image: '/images/recipe2.jpg'
-    },
-    {
-      title: 'Salmon and Cream Cheese Stuffed Mushrooms',
-      description: 'One of the most delicious and distinctive appetizers that can be served on any occasion',
-      time: '35 min',
-      image: '/images/recipe3.jpg'
-    },
-    {
-      title: 'Tortilla Gishta Tacos',
-      description: 'Gishta Tacos recipe is a delicious dish that combines rich creamy flavor with traditional Mexican tastes',
-      time: '15 min',
-      image: '/images/recipe4.jpg'
-    },
-  ]
-
-  const productCategories = [
-    { name: 'Liquid Dairy', icon: '🥛', link: '/products/liquid-dairy' },
-    { name: 'Cheese & Foods', icon: '🧀', link: '/products/cheese-foods' },
-    { name: 'Yogurt & Desserts', icon: '🍨', link: '/products/yogurt-desserts' },
-    { name: 'Dips', icon: '🥣', link: '/products/dips' },
-    { name: 'Ice Cream', icon: '🍦', link: '/products/ice-cream' },
-    { name: 'Bakery', icon: '🥖', link: '/products/bakery' },
-    { name: 'Poultry', icon: '🍗', link: '/products/poultry' },
-    { name: 'Juices', icon: '🧃', link: '/products/juices' },
-    { name: 'Beverages', icon: '☕', link: '/products/beverages' },
-    { name: 'Infant Nutrition', icon: '🍼', link: '/products/infant-nutrition' },
-    { name: 'Dates', icon: '🌴', link: '/products/dates' },
-    { name: 'Seafood', icon: '🐟', link: '/products/seafood' },
   ]
 
   const brands = [
@@ -125,7 +111,7 @@ const HomePage = () => {
             <p className="text-xl text-gray-700 mb-8">
               {heroSlides[0].subtitle}
             </p>
-            <div className="flex flex-wrap gap-4">
+            {/* <div className="flex flex-wrap gap-4">
               <Link href={heroSlides[0].link} className="btn-primary inline-flex items-center">
                 {heroSlides[0].cta}
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -133,13 +119,13 @@ const HomePage = () => {
               <Link href="/recipes" className="btn-secondary">
                 Check Our Recipes
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
 
       {/* Recipes Section */}
-      <section className="section-padding bg-white">
+      {/* <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Recipes</h2>
@@ -175,7 +161,7 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Products Section */}
       <section className="section-padding bg-gray-50">
@@ -186,13 +172,19 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {productCategories.map((category, idx) => (
+            {categories.map((category, idx) => (
               <Link 
                 key={idx}
-                href={category.link}
+                href={category.id}
                 className="bg-white p-6 rounded-lg text-center hover:shadow-lg transition-shadow product-card border border-gray-200"
               >
-                <div className="text-5xl mb-3">{category.icon}</div>
+                <div className="text-5xl mb-3">
+                <img 
+                          src={category.image??''}
+                          alt={category.name}
+                          className="w-full h-full object-contain"
+                        />
+                </div>
                 <h3 className="text-sm font-semibold text-gray-900">{category.name}</h3>
               </Link>
             ))}

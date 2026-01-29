@@ -1,91 +1,131 @@
 'use client'
 
 import Link from 'next/link'
+import { User, ShoppingCart, Menu, LogOut } from 'lucide-react'
+import { useAuth } from '@/app/contexts/AuthContext'
 import { useState } from 'react'
-import { Menu, X, Search, Globe } from 'lucide-react'
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { user, signOut } = useAuth()
+  const [showUserMenu, setShowUserMenu] = useState(false)
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/products', label: 'Products' },
-    { href: '/brands', label: 'Brands' },
-    { href: '/recipes', label: 'Recipes' },
-    { href: '/visit-almarai', label: 'Almarai Visits' },
-    { href: '/food-service', label: 'Foodservice' },
-    { href: '/careers', label: 'Careers' },
-    { href: '/contact-us', label: 'Contact Us' },
-    { href: '/corporate', label: 'Corporate' },
-  ]
+  const handleSignOut = async () => {
+    await signOut()
+    setShowUserMenu(false)
+  }
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      {/* Main Header */}
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-almarai-green"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="flex items-center space-x-2">
-              <svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 5L25 15H15L20 5Z" fill="#00A651"/>
-                <circle cx="20" cy="25" r="8" fill="#00A651"/>
-                <text x="40" y="28" fontFamily="Arial" fontSize="18" fontWeight="bold" fill="#00A651">almarai</text>
-              </svg>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            {navLinks.slice(0, 5).map((link) => (
-              <Link 
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-almarai-green text-sm font-medium transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right Icons */}
+      {/* Top Bar */}
+      <div className="bg-almarai-green text-white py-2">
+        <div className="container-custom flex justify-between items-center text-sm">
+          <p>Fresh dairy products delivered to your door</p>
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-700 hover:text-almarai-green">
-              <Search className="w-5 h-5" />
-            </button>
-            <button className="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-almarai-green text-sm">
-              <Globe className="w-4 h-4" />
-              <span>عربى</span>
-            </button>
+            <Link href="/contact-us" className="hover:underline">Contact Us</Link>
+            <span>|</span>
+            <a href="tel:+966114700005" className="hover:underline">+966 (11) 470 0005</a>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t">
-          <nav className="container-custom py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block py-3 text-gray-700 hover:text-almarai-green border-b"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+      {/* Main Header */}
+      <div className="container-custom py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <div className="text-2xl font-bold text-almarai-green">
+              Almarai
+            </div>
+          </Link>
+
+          {/* Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="hover:text-almarai-green transition-colors">
+              Home
+            </Link>
+            <Link href="/products" className="hover:text-almarai-green transition-colors">
+              Products
+            </Link>
+            <Link href="/about" className="hover:text-almarai-green transition-colors">
+              About Us
+            </Link>
+            <Link href="/contact-us" className="hover:text-almarai-green transition-colors">
+              Contact
+            </Link>
           </nav>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-4">
+            {/* Cart */}
+            <Link 
+              href="/cart" 
+              className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <ShoppingCart className="w-6 h-6" />
+              <span className="absolute -top-1 -right-1 bg-almarai-green text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                0
+              </span>
+            </Link>
+
+            {/* User Account */}
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <div className="w-8 h-8 bg-almarai-green text-white rounded-full flex items-center justify-center">
+                    {user.user_metadata?.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase()}
+                  </div>
+                  <span className="hidden lg:block text-sm font-medium">
+                    {user.user_metadata?.full_name || 'Account'}
+                  </span>
+                </button>
+
+                {/* Dropdown Menu */}
+                {showUserMenu && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-10" 
+                      onClick={() => setShowUserMenu(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
+                      <Link
+                        href="/account"
+                        className="block px-4 py-2 text-sm hover:bg-gray-100"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        My Account
+                      </Link>
+                      <hr className="my-2" />
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center space-x-2 text-red-600"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Sign Out</span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/signin"
+                className="flex items-center space-x-2 bg-almarai-green hover:bg-almarai-green-dark text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                <User className="w-5 h-5" />
+                <span>Sign In</span>
+              </Link>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button className="md:hidden p-2 hover:bg-gray-100 rounded-lg">
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }
